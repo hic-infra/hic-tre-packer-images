@@ -1,0 +1,17 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - python==3.10
+  - pip
+  - jupyterlab
+  - matplotlib
+  - numpy
+  - pandas
+  - pyodbc
+  - scipy
+  - scikit-image
+  - scikit-learn
+  - seaborn
+  - streamlit
+  - voila

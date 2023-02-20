@@ -1,0 +1,20 @@
+# https://unix.stackexchange.com/a/611494
+
+[Unit]
+Description=TigerVNC Service (ubuntu)
+After=network.target
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+SuccessExitStatus=0
+User=ubuntu
+
+Restart=on-failure
+RestartSec=5s
+
+ExecStart=/usr/bin/tigervncserver :%i -fg -localhost yes -SecurityTypes None -xstartup mate-session
+ExecStop=/usr/bin/tigervncserver -kill :%i
+
+[Install]
+WantedBy=default.target

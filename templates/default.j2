@@ -1,0 +1,14 @@
+{% set module_basedir = module_basedir|default("modules",true) %}
+{% set resource_basedir = resource_basedir|default("resources",true) %}
+
+{% set files = files|default([],true) %}
+
+{% set env = env|default([],true) %}
+{% set private_env = private_env|default([],true) %}
+
+{% set modules = modules|default([],true) %}
+{% set security_modules = security_modules|default([],true) %}
+
+{% set s3_resources = s3_resources|default("",true) %}
+
+{% include template.name + ".pkr.hcl" %}

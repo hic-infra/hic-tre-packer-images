@@ -1,0 +1,33 @@
+---
+name: "hic-windows-2019-example"
+
+base:
+  name: "Windows_Server-2019-English-Full-Base-*"
+  owner: "amazon"
+
+template:
+  name: windows
+
+instance:
+  # Use a large instance type to speed up the build process (smaller is fine for running)
+  type: t3a.2xlarge
+  volume_size: 50
+
+env:
+  - "AUTOHIBERNATE_TIME=120"
+
+modules:
+  - 7zip
+  - conda
+  - dbeaver
+  - firefox
+  - libreoffice
+  - notepad++
+  - rstudio
+  - ssms
+  - vscode
+  - autohibernate
+
+files:
+  - src: conda-envs/example.yml
+    dst: conda-environment.yml
