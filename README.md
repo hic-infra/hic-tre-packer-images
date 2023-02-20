@@ -1,4 +1,6 @@
 # HIC TRE Packer Images
+[![CI](https://github.com/hic-infra/hic-tre-packer-images/actions/workflows/ci.yml/badge.svg)](https://github.com/hic-infra/hic-tre-packer-images/actions/workflows/ci.yml)
+
 Packer templates for building TRE AMIs
 
 HIC build AMIs (Amazon Machine Images) for use in the HIC TRE using [Packer](https://www.packer.io/).

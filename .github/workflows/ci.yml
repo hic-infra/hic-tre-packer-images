@@ -1,0 +1,52 @@
+# Useful GitHub Actions docs:
+
+name: Continuous Integration
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Check formatting
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+
+      - name: Run checks
+        run: |
+          make packer
+
+  powershell_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Recursively run PowerShell checks
+        shell: pwsh
+        run: |
+          Invoke-ScriptAnalyzer -Recurse -EnableExit -Path .
+
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run shellcheck on all modules
+        run: |
+          shellcheck modules/*.sh
