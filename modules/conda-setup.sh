@@ -17,12 +17,11 @@ bash Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh -b -f -p ~/conda
 rm -f Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh
 popd
 
-BASE_ENVIRONMENT_YML="$SETUPDIR/conda-environment.yml"
-if [ -f "$BASE_ENVIRONMENT_YML" ]; then
-    echo "Conda: Configuring shell and installing packages"
-    # Activates the conda environment in bashrc
+echo "Searching for conda environments"
+
+compgen -G "${SETUPDIR}/conda-environment*.yml" && \
     ~/conda/bin/mamba init
-    ~/conda/bin/mamba env update --file "$BASE_ENVIRONMENT_YML"
-else
-    echo "$BASE_ENVIRONMENT_YML not found, skipping"
-fi
+
+for env in "${SETUPDIR}"/conda-environment*.yml ; do
+    ~/conda/bin/mamba env update --file "$env"
+done
