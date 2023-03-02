@@ -23,7 +23,7 @@ elif [ "$DISTRIB_RELEASE" == "22.04" ] ; then
     sudo gdebi -n rstudio-2022.12.0-353-amd64.deb
 else
     echo "--------------------------------------------------------"
-    echo "RStudio - Unsupported Ubutntu version ${DISTRIB_RELEASE}"
+    echo "RStudio - Unsupported Ubuntu version ${DISTRIB_RELEASE}"
     echo "--------------------------------------------------------"
     lsb_release -a
     echo "--------------------------------------------------------"
