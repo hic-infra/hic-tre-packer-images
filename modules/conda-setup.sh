@@ -4,6 +4,10 @@
 # conda-environment.yml to the remote directory
 set -eu
 
+# To prevent attempting mamba env update on a glob string if no conda
+# environments exist.
+shopt -s nullglob
+
 SETUPDIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 
 MAMBAFORGE_VERSION=22.11.1-4
@@ -18,10 +22,9 @@ rm -f Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh
 popd
 
 echo "Searching for conda environments"
-
-compgen -G "${SETUPDIR}/conda-environment*.yml" && \
-    ~/conda/bin/mamba init
+~/conda/bin/mamba init
 
 for env in "${SETUPDIR}"/conda-environment*.yml ; do
+    echo "Creating environment from $env"
     ~/conda/bin/mamba env update --file "$env"
 done
