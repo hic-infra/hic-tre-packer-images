@@ -14,6 +14,13 @@ sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_
 sudo apt update
 sudo apt install -y r-base
 
+# Specifying the direct path to /etc/lsb-release would probably be
+# fine on an Ubuntu machine, unfortunately this fails on my local dev
+# (Mac) environment. Specifying /dev/null as per docs:
+#
+#                               https://www.shellcheck.net/wiki/SC1091
+#
+# shellcheck source=/dev/null
 . /etc/lsb-release
 if [ "$DISTRIB_RELEASE" == "20.04" ] ; then
     wget https://s3.amazonaws.com/rstudio-ide-build/desktop/bionic/amd64/rstudio-2022.07.2-576-amd64.deb
