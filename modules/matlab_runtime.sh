@@ -2,7 +2,7 @@
 
 
 # Installs a MATLAB runtime when the environment variable
-# MATLAB_RUNTIME is set a runtime download URL (as a zip file).
+# MATLAB_RUNTIME is set to a runtime download URL (as a zip file).
 #
 # e.g. for MATLAB 2020a
 # MATLAB_RUNTIME=https://ssd.mathworks.com/supportfiles/downloads/R2020b/Release/8/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2020b_Update_8_glnxa64.zip
