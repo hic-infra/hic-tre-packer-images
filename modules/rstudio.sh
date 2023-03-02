@@ -14,8 +14,28 @@ sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_
 sudo apt update
 sudo apt install -y r-base
 
-wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-2021.09.2-382-amd64.deb
-sudo gdebi -n rstudio-2021.09.2-382-amd64.deb
+# Specifying the direct path to /etc/lsb-release would probably be
+# fine on an Ubuntu machine, unfortunately this fails on my local dev
+# (Mac) environment. Specifying /dev/null as per docs:
+#
+#                               https://www.shellcheck.net/wiki/SC1091
+#
+# shellcheck source=/dev/null
+. /etc/lsb-release
+if [ "$DISTRIB_RELEASE" == "20.04" ] ; then
+    wget https://s3.amazonaws.com/rstudio-ide-build/desktop/bionic/amd64/rstudio-2022.07.2-576-amd64.deb
+    sudo gdebi -n rstudio-2022.07.2-576-amd64.deb
+elif [ "$DISTRIB_RELEASE" == "22.04" ] ; then
+    wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2022.12.0-353-amd64.deb
+    sudo gdebi -n rstudio-2022.12.0-353-amd64.deb
+else
+    echo "--------------------------------------------------------"
+    echo "RStudio - Unsupported Ubuntu version ${DISTRIB_RELEASE}"
+    echo "--------------------------------------------------------"
+    lsb_release -a
+    echo "--------------------------------------------------------"
+    exit 1
+fi
 
 cat > "$HOME/.Rprofile" <<EOF
 # Set the default help type
