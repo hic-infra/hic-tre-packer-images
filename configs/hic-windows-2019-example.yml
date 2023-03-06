@@ -27,6 +27,7 @@ modules:
   - ssms
   - vscode
   - autohibernate
+  - shared-services-config
 
 files:
   - src: conda-envs/example.yml
