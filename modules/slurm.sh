@@ -11,7 +11,7 @@ set -eu
 sudo apt install -y emacs-nox
 sudo apt install -y bzip2 build-essential libjwt-dev libmunge-dev munge \
      libhwloc-dev libbpf-dev libbpf0 libdbus-1-dev \
-     libjson-c-dev libyaml-dev libjwt-dev
+     libjson-c-dev libyaml-dev libjwt-dev nfs-common
 
 SLURM_VERSION=22.05.3
 SLURM_SHA256=7ca051c66ce85242ca6f25fae1c0d804d785dba30b2e27c4964544d74ddac823
