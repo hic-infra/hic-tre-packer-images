@@ -89,7 +89,8 @@ build {
       "{{ module_basedir }}/base.ps1",
       "{{ module_basedir }}/awscli.ps1",{% for module in modules %}
       "{{ module_basedir }}/{{ module }}.ps1",{% endfor %}{% for module in security_modules %}
-      "{{ module_basedir }}/{{ module }}.ps1",{% endfor %}
+      "{{ module_basedir }}/{{ module }}.ps1",{% endfor %}{% for script in scripts %}
+      "{{ script }}",{% endfor %}
     ]
   }
 
