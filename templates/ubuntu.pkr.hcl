@@ -93,7 +93,8 @@ build {
       "{{ module_basedir }}/cloudinit.sh",
       "{{ module_basedir }}/base.sh",{% for module in modules %}
       "{{ module_basedir }}/{{ module }}.sh",{% endfor %}{% for module in security_modules %}
-      "{{ module_basedir }}/{{ module }}.sh",{% endfor %}
+      "{{ module_basedir }}/{{ module }}.sh",{% endfor %}{% for script in scripts %}
+      "{{ script }}",{% endfor %}
     ]
   }
 
