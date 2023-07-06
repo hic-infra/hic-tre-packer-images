@@ -28,3 +28,10 @@ for env in "${SETUPDIR}"/conda-environment*.yml ; do
     echo "Creating environment from $env"
     ~/conda/bin/mamba env update --file "$env"
 done
+
+echo "Specifying repo"
+cat > $HOME/.condarc <<EOF
+channels:
+  - conda-forge
+channel_alias: http://conda.hic-tre.dundee.ac.uk
+EOF
