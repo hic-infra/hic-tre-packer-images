@@ -29,7 +29,7 @@ for env in "${SETUPDIR}"/conda-environment*.yml ; do
     ~/conda/bin/mamba env update --file "$env"
 done
 
-echo "Specifying repo"
+echo "Setting default conda channel"
 cat > $HOME/.condarc <<EOF
 channels:
   - conda-forge
