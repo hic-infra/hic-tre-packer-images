@@ -7,7 +7,7 @@ Stop-Service -Name "wuauserv"
 Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\DWM' -Name ColorPrevalence -Value 1
 
 # Create a desktop shortcut for remounting S3
-$batchPath = "C:\workdir\mount_s3.bat"
+$batchPath = "C:\mount_s3.bat"
 New-Item $batchPath
 Set-Content $batchPath @"
 powershell.exe C:\workdir\start-rclone.ps1
