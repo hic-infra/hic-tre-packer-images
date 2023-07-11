@@ -15,10 +15,10 @@ MAMBAFORGE_SHA256=7a6a07de6063245163a87972fb15be3a226045166eb7ee526344f82da1f3b6
 
 echo "Installing Conda"
 pushd /tmp
-curl -sfLO https://github.com/conda-forge/miniforge/releases/download/$MAMBAFORGE_VERSION/Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh
+curl -sfLO "https://github.com/conda-forge/miniforge/releases/download/$MAMBAFORGE_VERSION/Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh"
 echo "$MAMBAFORGE_SHA256 Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh" | sha256sum -c -
-bash Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh -b -f -p ~/conda
-rm -f Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh
+bash "Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh" -b -f -p ~/conda
+rm -f "Mambaforge-$MAMBAFORGE_VERSION-Linux-x86_64.sh"
 popd
 
 echo "Searching for conda environments"
@@ -28,3 +28,10 @@ for env in "${SETUPDIR}"/conda-environment*.yml ; do
     echo "Creating environment from $env"
     ~/conda/bin/mamba env update --file "$env"
 done
+
+echo "Setting default conda channel"
+cat > "$HOME/.condarc" <<EOF
+channels:
+  - conda-forge
+channel_alias: http://conda.hic-tre.dundee.ac.uk
+EOF

@@ -1,13 +1,12 @@
+$ProgressPreference = 'SilentlyContinue' # Disable (slow) progress bar
+
 
 Set-Location C:\Tools
-$ProgressPreference = "SilentlyContinue" # PS progress bar is slow
 
-$LIBRE_VERSION = "7.4.5"
-# Checksum from
-# https://download.documentfoundation.org/libreoffice/stable/${LIBRE_VERSION}/win/x86_64/LibreOffice_${LIBRE_VERSION}_Win_x64.msi.mirrorlist
-$LIBRE_HASH = "aacdb6ec15cf1b76287cd089582e8d76fe769b218c1dbcbc7496cda5c3cd662b"
+$LIBRE_VERSION = "7.5.4"
+$LIBRE_HASH    = "efca7b819427f709960437dc4f0c603d1a4f928493836781929f5472b376b864"
 
-$LIBRE_URL = "https://download.documentfoundation.org/libreoffice/stable/${LIBRE_VERSION}/win/x86_64/LibreOffice_${LIBRE_VERSION}_Win_x64.msi"
+$LIBRE_URL = "https://mirrors.ukfast.co.uk/sites/documentfoundation.org/tdf/libreoffice/stable/${LIBRE_VERSION}/win/x86_64/LibreOffice_${LIBRE_VERSION}_Win_x86-64.msi"
 
 Invoke-WebRequest -Uri ${LIBRE_URL} -OutFile LibreOffice.msi
 $hash = Get-FileHash -Path LibreOffice.msi -Algorithm SHA256
@@ -20,4 +19,7 @@ Start-Process msiexec.exe -ArgumentList `
   ("/i", "LibreOffice.msi",
    "/quiet"
   ) -NoNewWindow -Wait -PassThru
+
+
+
 
