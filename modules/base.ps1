@@ -19,7 +19,7 @@ New-Item $fixerPath
 Set-Content $fixerPath @"
 taskkill /IM rclone.exe /F
 
-Get-ChildItem -Path D:\ -Depth 0 -ErrorAction SilentlyContinue | ForEach-Object {
+Get-ChildItem -Path D:\ -Depth 0 -Directory -ErrorAction SilentlyContinue | ForEach-Object {
   `$d = `$_
   try {
     `$files = `$d.GetFiles()
