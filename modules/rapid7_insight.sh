@@ -10,6 +10,12 @@ aws s3 cp "s3://${S3_PACKER_RESOURCES_PATH}/rapid7/$INSTALLER_FILENAME" .
 RAPID7_INSIGHT_TOKEN=$(aws s3 cp "s3://${S3_PACKER_RESOURCES_PATH}/rapid7/rapid7_insight_token.txt" -)
 chmod +x $INSTALLER_FILENAME
 
+if [ -z "${RAPID7_PROXY_HOST:-}" ]; then
+  RAPID7_PROXY_ARGS=""
+else
+  RAPID7_PROXY_ARGS="--https-proxy ${RAPID7_PROXY_HOST}:3128"
+fi
+
 cat > insight-install-job.sh <<EOF
 #!/bin/bash
 
@@ -21,11 +27,8 @@ cd /opt/ami-setup
 function install_insight () {
   ./$INSTALLER_FILENAME install_start \
       --token "${RAPID7_INSIGHT_TOKEN}" \
-      --https-proxy ${RAPID7_PROXY_HOST}:3128 \
-      --attributes "workspace,ubuntu,\
-SOPHOS_GROUP=${SOPHOS_GROUP},\
-AUTOHIBERNATE_TIME=${AUTOHIBERNATE_TIME:=None}\
-PACKER_BUILD_NAME=${PACKER_BUILD_NAME}"
+      ${RAPID7_PROXY_ARGS} \
+      --attributes "workspace,ubuntu"
 }
 
 while ! systemctl status ir_agent > /dev/null; do
