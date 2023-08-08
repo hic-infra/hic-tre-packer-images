@@ -29,9 +29,11 @@ for env in "${SETUPDIR}"/conda-environment*.yml ; do
     ~/conda/bin/mamba env update --file "$env"
 done
 
+if [ -n "${CONDA_SERVER:-}" ]; then
 echo "Setting default conda channel"
 cat > "$HOME/.condarc" <<EOF
 channels:
   - conda-forge
-channel_alias: http://conda.hic-tre.dundee.ac.uk
+channel_alias: ${CONDA_SERVER}
 EOF
+fi

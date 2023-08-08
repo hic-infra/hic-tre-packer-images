@@ -40,10 +40,12 @@ if ( Test-Path -Path ${BASE_ENVIRONMENT_YML} -PathType Leaf ) {
     Write-Output "$BASE_ENVIRONMENT_YML not found, skipping"
 }
 
-$condarc = "C:\Users\Administrator\.condarc"
-New-Item $condarc
-Set-Content $condarc "channels:"
-Add-Content $condarc "  - conda-forge"
-Add-Content $condarc "channel_alias: http://conda.hic-tre.dundee.ac.uk"
+if ("$Env:CONDA_SERVER") {
+  $condarc = "C:\Users\Administrator\.condarc"
+  New-Item $condarc
+  Set-Content $condarc "channels:"
+  Add-Content $condarc "  - conda-forge"
+  Add-Content $condarc "channel_alias: $Env:CONDA_SERVER"
+}
 
 conda deactivate
