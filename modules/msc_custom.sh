@@ -53,8 +53,8 @@ sudo tee /usr/local/bin/nb <<EOF
 #!/bin/bash
 
 cd /home/ubuntu
-eval "\$(conda shell.bash hook)"
-conda activate msc
+eval "\$(/home/ubuntu/conda/bin/conda shell.bash hook)"
+/home/ubuntu/conda/bin/conda activate msc
 
 jupyter notebook &
 sleep 3
