@@ -51,17 +51,11 @@ sudo tee /usr/local/bin/nb <<EOF
 #!/bin/bash
 
 cd /home/ubuntu
-eval "\$(/home/ubuntu/conda/bin/conda shell.bash hook)"
-/home/ubuntu/conda/bin/conda activate msc
 
-jupyter notebook &
-sleep 3
-notebook_url=\$(jupyter notebook list 2>&1 | awk "/http/ {print \$2}" | tail -n1)
+. \$HOME/conda/etc/profile.d/conda.sh
+conda activate msc
 
-unset LD_LIBRARY_PATH
-xdg-open "\$notebook_url"
-
-wait
+jupyter notebook
 EOF
 
 sudo chmod +x /usr/local/bin/nb
@@ -72,7 +66,7 @@ Name=Jupyter Notebook
 GenericName=Python Notebook
 Comment=Launch Jupyter Notebook
 Terminal=true
-Exec=/usr/bin/bash -c "source /home/ubuntu/conda/etc/profile.d/conda.sh && /usr/local/bin/nb"
+Exec=/usr/bin/bash -c "/usr/local/bin/nb"
 Icon=/home/ubuntu/conda/envs/msc/share/icons/hicolor/scalable/apps/notebook.svg
 Type=Application
 EOF
