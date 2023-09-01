@@ -35,17 +35,15 @@ popd
 
 ######################################################################
 # Some TensorFlow stuff
-eval "$(/home/ubuntu/conda/bin/conda shell.bash hook)"
-/home/ubuntu/conda/bin/conda activate msc
-export CONDA_PREFIX="$HOME/conda/envs/msc"
-mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 
-echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' \
-     > $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/:$CUDNN_PATH/lib:$LD_LIBRARY_PATH' \
-     >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+CUDNN_PATH=$(find "$HOME/conda/envs/msc" -path "*/cudnn/lib")
+echo "export LD_LIBRARY_PATH=$CUDNN_PATH:$HOME/conda/envs/msc/lib/:\$LD_LIBRARY_PATH" \
+     > "$HOME/conda/envs/msc/etc/conda/activate.d/env_vars.sh"
 
-source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+# We want to trigger a download of EfficientNet weights
+~/conda/bin/conda run -n msc python -c "\
+from tensorflow.keras.applications import EfficientNetB0; \
+model = EfficientNetB0(weights='imagenet')"
 
 ######################################################################
 # Jupyter Notebook shortcut
