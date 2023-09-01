@@ -36,6 +36,7 @@ popd
 ######################################################################
 # Some TensorFlow stuff
 
+mkdir -p "$HOME/conda/envs/msc/etc/conda/activate.d"
 CUDNN_PATH=$(find "$HOME/conda/envs/msc" -path "*/cudnn/lib")
 echo "export LD_LIBRARY_PATH=$CUDNN_PATH:$HOME/conda/envs/msc/lib/:\$LD_LIBRARY_PATH" \
      > "$HOME/conda/envs/msc/etc/conda/activate.d/env_vars.sh"
