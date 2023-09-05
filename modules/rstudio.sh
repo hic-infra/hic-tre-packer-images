@@ -59,4 +59,5 @@ sudo apt update
 
 sudo apt install -y r-cran-odbc r-cran-dbi r-cran-qqman r-cran-metafor \
      r-cran-tidyr r-cran-ggplot2 r-cran-hmisc r-cran-data.table \
-     r-cran-dplyr r-cran-lubridate r-cran-survival r-cran-survminer
+     r-cran-dplyr r-cran-lubridate r-cran-survival r-cran-survminer \
+     r-cran-tidyverse
