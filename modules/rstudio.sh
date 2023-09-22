@@ -37,13 +37,14 @@ else
     exit 1
 fi
 
+if [ -n "${CRAN_SERVER:-}" ]; then
 cat > "$HOME/.Rprofile" <<EOF
 # Set the default help type
 options(help_type="html")
 
 # HIC TRE R Repository
 local({r <- getOption("repos")
-       r["CRAN"] <- "http://cran.hic-tre.dundee.ac.uk/"
+       r["CRAN"] <- "${CRAN_SERVER}"
        options(repos=r)
 })
 
@@ -52,6 +53,7 @@ Sys.setenv(TZ='Europe/London')
 EOF
 
 echo "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1" >> "$HOME/.Renviron"
+fi
 
 sudo add-apt-repository -y ppa:c2d4u.team/c2d4u4.0+
 sudo apt update

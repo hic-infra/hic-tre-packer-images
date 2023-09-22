@@ -12,13 +12,14 @@ Start-Process C:\Tools\RStudio-installer.exe -ArgumentList "/S" -NoNewWindow -Wa
 Invoke-WebRequest -Uri "https://github.com/r-windows/rtools-installer/releases/download/2022-02-06/rtools40-x86_64.exe" -OutFile C:\Tools\RTools.exe
 Start-Process C:\Tools\RTools.exe -ArgumentList "/VERYSILENT" -NoNewWindow -Wait -PassThru
 
+if ("$Env:CRAN_SERVER") {
 $RConfig = @"
 # Set the default help type
 options(help_type="html")
 
 # HIC TRE R Repository
 local({r <- getOption("repos")
-       r["CRAN"] <- "http://cran.hic-tre.dundee.ac.uk/"
+       r["CRAN"] <- "$Env:CRAN_SERVER"
        options(repos=r)
 })
 
@@ -27,3 +28,4 @@ Sys.setenv(TZ='Europe/London')
 "@
 Set-Content "C:\Program Files\R\R-4.1.3\etc\Rprofile.site" $RConfig
 Set-Content "C:\Users\Administrator\Documents\.Renviron" "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1"
+}

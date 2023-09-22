@@ -24,18 +24,27 @@ if($RAPID7_INSIGHT_TOKEN.length -ne 39) {
 Write-Output @"
 cd C:\Tools
 
-While ( Test-NetConnection -ComputerName ${Env:RAPID7_PROXY_HOST} -Port 3128 |
-  ? { ! `$_.TcpTestSucceeded } ) {
-      Start-Sleep -Seconds 10
-  }
+If ("${Env:RAPID7_PROXY_HOST}") {
+  While ( Test-NetConnection -ComputerName ${Env:RAPID7_PROXY_HOST} -Port 3128 |
+    ? { ! `$_.TcpTestSucceeded } ) {
+        Start-Sleep -Seconds 10
+    }
 
-Start-Process msiexec.exe -ArgumentList ``
-  ("/i",   "$INSTALLER_FILENAME",
-   "/l*v", "$INSTALLER_LOGFILE",
-   "/quiet",
-   "CUSTOMTOKEN=$RAPID7_INSIGHT_TOKEN",
-   "HTTPSPROXY=${Env:RAPID7_PROXY_HOST}:3128"
-  ) -NoNewWindow -Wait -PassThru
+  Start-Process msiexec.exe -ArgumentList ``
+    ("/i",  "$INSTALLER_FILENAME",
+    "/l*v", "$INSTALLER_LOGFILE",
+    "/quiet",
+    "CUSTOMTOKEN=$RAPID7_INSIGHT_TOKEN",
+    "HTTPSPROXY=${Env:RAPID7_PROXY_HOST}:3128"
+    ) -NoNewWindow -Wait -PassThru
+} else {
+  Start-Process msiexec.exe -ArgumentList ``
+    ("/i",  "$INSTALLER_FILENAME",
+    "/l*v", "$INSTALLER_LOGFILE",
+    "/quiet",
+    "CUSTOMTOKEN=$RAPID7_INSIGHT_TOKEN"
+    ) -NoNewWindow -Wait -PassThru
+}
 "@ | Out-File -FilePath C:\Tools\InsightSetup.ps1
 
 Register-ScheduledJob -Name InsightSetup -FilePath C:\Tools\InsightSetup.ps1 `

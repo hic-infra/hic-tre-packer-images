@@ -12,6 +12,14 @@ while [ ! -s SophosSetup.sh ] ; do
     chmod +x SophosSetup.sh
 done
 
+if [ -z "${SOPHOS_MESSAGE_RELAY:-}" ]; then
+  SOPHOS_SERVER=https://central.sophos.com
+  GROUP_PREFIX="HIC - AWS - Other"
+else
+  SOPHOS_SERVER=http://${SOPHOS_MESSAGE_RELAY}
+  GROUP_PREFIX="HIC - AWS - Cloud TRE"
+fi
+
 # if https://central.sophos.com is accessible assume full outbound access
 cat > sophos-install-job.sh <<EOF
 #!/bin/bash
@@ -22,16 +30,16 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/b
 install_sophos() {
   [ -d /opt/sophos-spl ] && rm -rf /opt/sophos-spl
 
-  while ! curl -s http://${SOPHOS_MESSAGE_RELAY} && ! curl -s https://central.sophos.com > /dev/null ; do
+  while ! curl -s "${SOPHOS_SERVER}" > /dev/null ; do
     date
-    echo "${SOPHOS_MESSAGE_RELAY} not available yet, sleeping..."
+    echo "${SOPHOS_SERVER} not available yet, sleeping..."
     sleep 60
   done
 
   echo "Sophos is reachable!"
 
   date
-  /opt/ami-setup/SophosSetup.sh --group="HIC - AWS - Cloud TRE\\\\${SOPHOS_GROUP}"
+  /opt/ami-setup/SophosSetup.sh --group="${GROUP_PREFIX}\\\\${SOPHOS_GROUP}"
 
   date
   echo "Sophos install complete"
