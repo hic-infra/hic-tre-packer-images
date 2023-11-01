@@ -47,6 +47,10 @@ from tensorflow.keras.applications import EfficientNetB0; \
 model = EfficientNetB0(weights='imagenet')"
 
 ######################################################################
+# CUDA Toolkit
+#sudo apt install -y nvidia-cuda-toolkit
+
+######################################################################
 # Jupyter Notebook shortcut
 sudo tee /usr/local/bin/nb <<EOF
 #!/bin/bash
