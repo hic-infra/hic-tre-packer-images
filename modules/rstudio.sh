@@ -23,11 +23,11 @@ sudo apt install -y r-base
 # shellcheck source=/dev/null
 . /etc/lsb-release
 if [ "$DISTRIB_RELEASE" == "20.04" ] ; then
-    wget https://s3.amazonaws.com/rstudio-ide-build/desktop/bionic/amd64/rstudio-2022.07.2-576-amd64.deb
-    sudo gdebi -n rstudio-2022.07.2-576-amd64.deb
+    wget https://s3.amazonaws.com/rstudio-ide-build/electron/focal/amd64/rstudio-2023.06.1-524-amd64.deb
+    sudo gdebi -n rstudio-2023.06.1-524-amd64.deb
 elif [ "$DISTRIB_RELEASE" == "22.04" ] ; then
-    wget https://download1.rstudio.org/electron/jammy/amd64/rstudio-2022.12.0-353-amd64.deb
-    sudo gdebi -n rstudio-2022.12.0-353-amd64.deb
+    wget https://s3.amazonaws.com/rstudio-ide-build/electron/jammy/amd64/rstudio-2023.06.1-524-amd64.deb
+    sudo gdebi -n rstudio-2023.06.1-524-amd64.deb
 else
     echo "--------------------------------------------------------"
     echo "RStudio - Unsupported Ubuntu version ${DISTRIB_RELEASE}"
@@ -59,4 +59,5 @@ sudo apt update
 
 sudo apt install -y r-cran-odbc r-cran-dbi r-cran-qqman r-cran-metafor \
      r-cran-tidyr r-cran-ggplot2 r-cran-hmisc r-cran-data.table \
-     r-cran-dplyr r-cran-lubridate r-cran-survival r-cran-survminer
+     r-cran-dplyr r-cran-lubridate r-cran-survival r-cran-survminer \
+     r-cran-tidyverse

@@ -5,8 +5,8 @@ set -eu
 SETUPDIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 cd "$SETUPDIR"
 
-PYCHARM_VERSION=2021.3.2
-PYCHARM_SHA256=f1ae01f471d01c6f09aab0a761c6dea9834ef584f2aaf6d6ebecdce6b55a66e8
+PYCHARM_VERSION=2023.2.1
+PYCHARM_SHA256=5956c6cb5a5bad1d9749e487b3bb69fcbf0170f52324e4ff009283b723838778
 
 echo "Installing PyCharm"
 curl -sfLO https://download-cdn.jetbrains.com/python/pycharm-community-${PYCHARM_VERSION}.tar.gz
@@ -28,3 +28,4 @@ Icon=/opt/pycharm-community-${PYCHARM_VERSION}/bin/pycharm.svg
 Type=Application
 EOF
 sudo chmod +x /opt/pycharm/PyCharm.desktop
+ln -s /opt/pycharm/PyCharm.desktop /home/ubuntu/Desktop/PyCharm.desktop

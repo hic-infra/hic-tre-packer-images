@@ -2,6 +2,77 @@
 
 set -eu
 
+
+######################################################################
+# PLINK
+mkdir plink
+pushd plink
+curl -sfLO https://s3.amazonaws.com/plink1-assets/plink_linux_x86_64_20230116.zip
+unzip plink_linux_x86_64_20230116.zip
+chmod +x plink
+sudo ln -s "$(pwd)/plink" /usr/local/bin/plink
+popd
+
+######################################################################
+# GTOOL
+mkdir gtool
+pushd gtool
+curl -sfLO https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool_v0.7.5_x86_64.tgz
+tar zxvf gtool_v0.7.5_x86_64.tgz
+chmod +x gtool
+sudo ln -s "$(pwd)/gtool" /usr/local/bin/gtool
+popd
+
+######################################################################
+# SNPTEST
+mkdir snptest
+pushd snptest
+curl -sfLO http://www.well.ox.ac.uk/~gav/resources/snptest_v2.5.4-beta3_linux_x86_64_static.tgz
+tar zxvf snptest_v2.5.4-beta3_linux_x86_64_static.tgz
+sudo cp snptest_v2.5.4-beta3_linux_x86_64_static/snptest_v2.5.4-beta3 /usr/local/bin/snptest
+sudo chmod +x /usr/local/bin/snptest
+popd
+
+######################################################################
+# Some TensorFlow stuff
+
+mkdir -p "$HOME/conda/envs/msc/etc/conda/activate.d"
+CUDNN_PATH=$(find "$HOME/conda/envs/msc" -path "*/cudnn/lib")
+echo "export LD_LIBRARY_PATH=$CUDNN_PATH:$HOME/conda/envs/msc/lib/:\$LD_LIBRARY_PATH" \
+     > "$HOME/conda/envs/msc/etc/conda/activate.d/env_vars.sh"
+
+# We want to trigger a download of EfficientNet weights
+~/conda/bin/conda run -n msc python -c "\
+from tensorflow.keras.applications import EfficientNetB0; \
+model = EfficientNetB0(weights='imagenet')"
+
+######################################################################
+# Jupyter Notebook shortcut
+sudo tee /usr/local/bin/nb <<EOF
+#!/bin/bash
+
+cd /home/ubuntu
+
+. \$HOME/conda/etc/profile.d/conda.sh
+conda activate msc
+
+jupyter notebook
+EOF
+
+sudo chmod +x /usr/local/bin/nb
+
+cat <<EOF | tee /home/ubuntu/Desktop/Notebook.desktop
+[Desktop Entry]
+Name=Jupyter Notebook
+GenericName=Python Notebook
+Comment=Launch Jupyter Notebook
+Terminal=true
+Exec=/usr/bin/bash -c "/usr/local/bin/nb"
+Icon=/home/ubuntu/conda/envs/msc/share/icons/hicolor/scalable/apps/notebook.svg
+Type=Application
+EOF
+sudo chmod +x /home/ubuntu/Desktop/Notebook.desktop
+
 ######################################################################
 # Set up R environment
 
@@ -17,17 +88,6 @@ sudo R --no-save -e "BiocManager::install('gwasurvivr')"
 sudo R --no-save -e "devtools::install_github('jdstorey/qvalue')"
 
 mv "${HOME}/tmp_Rprofile" "${HOME}/.Rprofile"
-
-######################################################################
-# Set up python environments
-
-# pinning numpy to supress a warning about numpy needing to be less
-# than 1.23.0 with scikit, even though the deps specify numpy 1.23.1.
-read -ra BASE_PKG <<<"numpy==1.23.0 matplotlib scikit-learn pillow pandas"
-~/conda/bin/mamba create -y -n pytorch
-~/conda/bin/mamba install -y pytorch torchvision "${BASE_PKG[@]}" -c pytorch -n pytorch
-~/conda/bin/mamba create -y -n tensorflow
-~/conda/bin/mamba install -y tensorflow "${BASE_PKG[@]}" -c anaconda -n tensorflow
 
 ######################################################################
 # Test custom installs

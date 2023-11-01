@@ -20,6 +20,7 @@ sudo tee /usr/bin/autohibernate <<EOF
 set -eu
 
 AUTOHIBERNATE_TIME=$AUTOHIBERNATE_TIME
+AUTOHIBERNATE_BEHAVIOUR="${AUTHOHIBERNATE_BEHAVIOUR:=hibernate}"
 export DISPLAY=:1
 
 if [ \$(xprintidle) -gt \$AUTOHIBERNATE_TIME ] ; then
@@ -36,7 +37,7 @@ if [ \$(xprintidle) -gt \$AUTOHIBERNATE_TIME ] ; then
   vncconfig -disconnect
 
   # Let's hibernate.
-  sudo systemctl hibernate
+  sudo systemctl "\$AUTOHIBERNATE_BEHAVIOUR"
 
   # Without a sleep, the swap will be turned off too soon after
   # triggering the hibernate (which is async). We need to wait a
