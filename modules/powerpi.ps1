@@ -2,7 +2,7 @@
 Set-Location C:\Tools
 $ProgressPreference = "SilentlyContinue" # PS progress bar is slow
 
-$PBI_HASH = "511e86ab13e204a00b73301e70deb40e323f6c809277b8200df7160ea2a1bc4b"
+$PBI_HASH = "250e751657a0de99da2bf6e5c1332e0e6f563aa71c0a3a52478ba6253318b267"
 $PBI_URL = "https://download.microsoft.com/download/8/8/0/880BCA75-79DD-466A-927D-1ABF1F5454B0/PBIDesktopSetup_x64.exe"
 
 Invoke-WebRequest -Uri ${PBI_URL} -OutFile PBIDesktopSetup_x64.exe
