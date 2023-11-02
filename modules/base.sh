@@ -11,7 +11,7 @@ sudo apt-get -y -q update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
   jq \
   tigervnc-standalone-server \
-  ubuntu-mate-desktop
+  ubuntu-mate-desktop firefox
 
 # Don't boot into desktop (graphical.target)
 sudo systemctl set-default multi-user.target
