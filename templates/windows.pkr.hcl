@@ -94,6 +94,11 @@ build {
     ]
   }
 
+  provisioner "shell" {
+    remote_folder = "/opt/ami-setup"
+    inline = {{inline|tojson}}
+  }
+
   provisioner "powershell" {
     inline = [
       # Re-initialise the AWS instance on startup

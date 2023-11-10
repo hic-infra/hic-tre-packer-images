@@ -12,4 +12,6 @@
 
 {% set s3_resources = s3_resources|default("",true) %}
 
+{% set inline = (inline|default("echo \"Inline script.\"",true)).split("\n") %}
+
 {% include template.name + ".pkr.hcl" %}
