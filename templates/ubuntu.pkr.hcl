@@ -98,6 +98,11 @@ build {
     ]
   }
 
+  provisioner "shell" {
+    remote_folder = "/opt/ami-setup"
+    inline = {{inline|tojson}}
+  }
+
   post-processor "manifest" {
     output     = "builds/${var.ami-prefix}manifest.json"
     strip_path = true
