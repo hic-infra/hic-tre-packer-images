@@ -94,8 +94,7 @@ build {
     ]
   }
 
-  provisioner "shell" {
-    remote_folder = "/opt/ami-setup"
+  provisioner "powershell" {
     inline = {{inline|tojson}}
   }
 
