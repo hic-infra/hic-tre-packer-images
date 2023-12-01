@@ -18,7 +18,7 @@ locals {
 }
 
 # https://www.packer.io/docs/builders/amazon/ebs
-source "amazon-ebs" "windows2019" {
+source "amazon-ebs" "windows" {
   ami_name      = "${local.ami_name}"
   instance_type = "{{ instance.type }}"
   region        = "${var.region}"
@@ -64,7 +64,7 @@ source "amazon-ebs" "windows2019" {
 
 # https://www.packer.io/docs/provisioners
 build {
-  sources = ["source.amazon-ebs.windows2019"]
+  sources = ["source.amazon-ebs.windows"]
 
   provisioner "powershell" {
     inline = [
