@@ -18,7 +18,7 @@ locals {
 }
 
 # https://www.packer.io/docs/builders/amazon/ebs
-source "amazon-ebs" "windows2019" {
+source "amazon-ebs" "windows" {
   ami_name      = "${local.ami_name}"
   instance_type = "{{ instance.type }}"
   region        = "${var.region}"
@@ -64,7 +64,7 @@ source "amazon-ebs" "windows2019" {
 
 # https://www.packer.io/docs/provisioners
 build {
-  sources = ["source.amazon-ebs.windows2019"]
+  sources = ["source.amazon-ebs.windows"]
 
   provisioner "powershell" {
     inline = [
@@ -100,10 +100,9 @@ build {
 
   provisioner "powershell" {
     inline = [
-      # Re-initialise the AWS instance on startup
-      "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\InitializeInstance.ps1 -Schedule",
       # Remove system specific information from this image
-      "C:\\ProgramData\\Amazon\\EC2-Windows\\Launch\\Scripts\\SysprepInstance.ps1 -NoShutdown"
+      "& 'C:/Program Files/Amazon/EC2Launch/EC2Launch.exe' reset --block",
+      "& 'C:/Program Files/Amazon/EC2Launch/EC2Launch.exe' sysprep --block"
     ]
   }
 

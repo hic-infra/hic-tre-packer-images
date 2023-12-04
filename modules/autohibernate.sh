@@ -27,7 +27,7 @@ if [ \$(xprintidle) -gt \$AUTOHIBERNATE_TIME ] ; then
   xdotool mousemove 0 0 # reset idle time
 
   # We need to enable the swap file to dump RAM to.
-  [ -f /swap-hibinit] && \\
+  [ -f /swap-hibinit ] && \\
     sudo swapon /swap-hibinit
 
   # Just in case there is a client connected to the VNC server (there
