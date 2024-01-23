@@ -32,3 +32,13 @@ sudo ./aws/install
 # Add terminal shortcut to desktop for easy access
 mkdir -p ~/Desktop
 ln -s /usr/share/applications/mate-terminal.desktop ~/Desktop/
+
+# Replace firefox snap with debian package if it's installed
+# snap packages have some issues with VNC because of cgroup
+if [ -f /snap/bin/firefox ] ; then
+    # On Ubuntu 22.04+, deb `firefox` package is transitional package
+    # and results in the snap package installation.
+    sudo snap remove firefox
+    sudo add-apt-repository -y ppa:mozillateam/ppa
+    sudo apt install -y -q firefox-esr
+fi
