@@ -25,6 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install -r requirements.txt
+          packer plugins install github.com/hashicorp/amazon
 
       - name: Run checks
         run: |
