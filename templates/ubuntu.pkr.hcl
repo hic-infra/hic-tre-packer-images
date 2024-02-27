@@ -45,6 +45,10 @@ source "amazon-ebs" "ubuntu2004" {
     delete_on_termination = true
   }
 
+{% if subnet_id %}
+  subnet_id = "{{ subnet_id }}"
+{% endif %}
+
 {% if s3_resources %}
   temporary_iam_instance_profile_policy_document {
     Statement {

@@ -6,6 +6,16 @@ Packer templates for building TRE AMIs
 HIC build AMIs (Amazon Machine Images) for use in the HIC TRE using [Packer](https://www.packer.io/).
 These AMIs are all very similar so we've written some tools to make it easier to template them.
 
+## Prerequisites
+
+You must install Packer and Python 3.
+You will also need access to an AWS account.
+
+If you are using a recent version of Packer you may also need to install the Amazon plugin:
+```
+packer plugins install github.com/hashicorp/amazon
+```
+
 ## Usage
 
 Two example configurations are provided in the `configs` directory, one for Windows 2019 and one for Ubuntu 22.04 desktop.

@@ -45,6 +45,10 @@ source "amazon-ebs" "windows" {
     volume_size = {{ instance.volume_size }}
   }
 
+{% if subnet_id %}
+  subnet_id = "{{ subnet_id }}"
+{% endif %}
+
 {% if s3_resources %}
   temporary_iam_instance_profile_policy_document {
     Statement {
