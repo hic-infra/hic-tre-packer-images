@@ -2,8 +2,8 @@
 Set-Location C:\Tools
 $ProgressPreference = "SilentlyContinue" # PS progress bar is slow
 
-$MAMBAFORGE_VERSION = "22.11.1-2"
-$MAMBAFORGE_HASH = "3dfdaf08d86acdbf9c0b1f390719a0c671483dd327f3f594355504d7bce18402"
+$MAMBAFORGE_VERSION = "23.11.0-0"
+$MAMBAFORGE_HASH = "2c4aa30733d3a52be315c974320c8e35a1635b0aef0d03064732aec9bb86eb2c"
 
 $MAMBAFORGE_URL = "https://github.com/conda-forge/miniforge/releases/download/${MAMBAFORGE_VERSION}/Mambaforge-${MAMBAFORGE_VERSION}-Windows-x86_64.exe"
 
@@ -21,7 +21,7 @@ if ( ${MAMBAFORGE_HASH} -ne $hash.Hash ) {
 # of files, this can take 30+ minutes, causing the CloudFormation
 # template to timeout.
 Start-Process C:\Tools\Mambaforge.exe -ArgumentList `
-  ("/InstallationType=JustMe",
+  ("/InstallationType=AllUsers",
    "/RegisterPython=1",
    "/S",
    "/D=C:\conda"
