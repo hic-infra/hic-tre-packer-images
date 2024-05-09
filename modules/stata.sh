@@ -88,7 +88,7 @@ Name=Stata 17
 GenericName=Stata
 Comment=Statistical software for data science
 Terminal=false
-Exec=/usr/local/stata17/xstata-mp
+Exec=bash -c "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libodbc.so /usr/local/stata17/xstata-mp"
 Icon=/usr/local/stata17/stata17.png
 Type=Application
 EOF
