@@ -13,6 +13,14 @@ Start-Process C:\Tools\RStudio-installer.exe -ArgumentList "/S" -NoNewWindow -Wa
 Invoke-WebRequest -Uri "https://cran.r-project.org/bin/windows/Rtools/rtools44/files/rtools44-6104-6039.exe" -OutFile C:\Tools\RTools.exe
 Start-Process C:\Tools\RTools.exe -ArgumentList "/VERYSILENT" -NoNewWindow -Wait -PassThru
 
+# Install some default packages
+$pkgs = "tidyverse","odbc","dbi","qqman","metafor","tidyr","ggplot2",`
+  "hmisc","data.table","dplyr","lubridate","survival","survminer"
+foreach ($pkg in $pkgs) {
+    & "C:\Program Files\R\R-4.4.0\bin\Rscript.exe" `
+      -e "install.packages('$pkg', repos='http://cran.uk.r-project.org')"
+}
+
 $RConfig = @"
 # Set the default help type
 options(help_type="html")
