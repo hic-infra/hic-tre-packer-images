@@ -34,5 +34,5 @@ local({r <- getOption("repos")
 # Set timezone
 Sys.setenv(TZ='Europe/London')
 "@
-Set-Content "C:\Program Files\R\R-4.3.2\etc\Rprofile.site" $RConfig
+Set-Content "C:\Program Files\R\R-4.4.0\etc\Rprofile.site" $RConfig
 Set-Content "C:\Users\Administrator\Documents\.Renviron" "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1"
