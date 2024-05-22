@@ -24,13 +24,6 @@ foreach ($pkg in $pkgs) {
 $RConfig = @"
 # Set the default help type
 options(help_type="html")
-
-# HIC TRE R Repository
-local({r <- getOption("repos")
-       r["CRAN"] <- "http://cran.hic-tre.dundee.ac.uk/"
-       options(repos=r)
-})
-
 # Set timezone
 Sys.setenv(TZ='Europe/London')
 "@
