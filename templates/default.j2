@@ -6,6 +6,12 @@
 
 {% set env = env|default([],true) %}
 {% set private_env = private_env|default([],true) %}
+{# For example, to configure an internal CRAN and conda proxy/repository:
+{% set private_env = [
+  "CONDA_PROXY_SERVER=http://conda.hic-tre.dundee.ac.uk",
+  "CRAN_PROXY_SERVER=http://cran.hic-tre.dundee.ac.uk/",
+] %}
+#}
 
 {% set modules = modules|default([],true) %}
 {% set security_modules = security_modules|default([],true) %}
