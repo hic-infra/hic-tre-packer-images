@@ -29,9 +29,12 @@ for env in "${SETUPDIR}"/conda-environment*.yml ; do
     ~/conda/bin/mamba env update --file "$env"
 done
 
-echo "Setting default conda channel"
-cat > "$HOME/.condarc" <<EOF
+# Internal Conda proxy or repository
+if [ -n "${CONDA_PROXY_SERVER:-}" ]; then
+    echo "Configuring Conda proxy ${CONDA_PROXY_SERVER}"
+    cat > "$HOME/.condarc" <<EOF
 channels:
   - conda-forge
-channel_alias: http://conda.hic-tre.dundee.ac.uk
+channel_alias: ${CONDA_PROXY_SERVER}
 EOF
+fi

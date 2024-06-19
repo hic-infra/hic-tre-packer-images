@@ -40,10 +40,14 @@ if ( Test-Path -Path ${BASE_ENVIRONMENT_YML} -PathType Leaf ) {
     Write-Output "$BASE_ENVIRONMENT_YML not found, skipping"
 }
 
-$condarc = "C:\Users\Administrator\.condarc"
-New-Item $condarc
-Set-Content $condarc "channels:"
-Add-Content $condarc "  - conda-forge"
-Add-Content $condarc "channel_alias: http://conda.hic-tre.dundee.ac.uk"
+# Internal Conda proxy or repository
+if ( $Env:CONDA_PROXY_SERVER ) {
+    Write-Output "Configuring conda proxy ${Env:CONDA_PROXY_SERVER}"
+    $condarc = "C:\Users\Administrator\.condarc"
+    New-Item $condarc
+    Set-Content $condarc "channels:"
+    Add-Content $condarc "  - conda-forge"
+    Add-Content $condarc "channel_alias: ${Env:CONDA_PROXY_SERVER}"
+}
 
 conda deactivate

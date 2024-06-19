@@ -42,15 +42,20 @@ cat > "$HOME/.Rprofile" <<EOF
 # Set the default help type
 options(help_type="html")
 
-# HIC TRE R Repository
-local({r <- getOption("repos")
-       r["CRAN"] <- "http://cran.hic-tre.dundee.ac.uk/"
-       options(repos=r)
-})
-
 # Set timezone
 Sys.setenv(TZ='Europe/London')
 EOF
+
+# Internal CRAN proxy or repository
+if [ -n "${CRAN_PROXY_SERVER:-}" ]; then
+    echo "Configuring CRAN proxy ${CRAN_PROXY_SERVER}"
+cat >> "$HOME/.Rprofile" <<EOF
+local({r <- getOption("repos")
+    r["CRAN"] <- "$CRAN_PROXY_SERVER"
+    options(repos=r)
+})
+EOF
+fi
 
 echo "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1" >> "$HOME/.Renviron"
 

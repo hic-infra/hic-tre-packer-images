@@ -25,14 +25,21 @@ $RConfig = @"
 # Set the default help type
 options(help_type="html")
 
-# HIC TRE R Repository
-local({r <- getOption("repos")
-       r["CRAN"] <- "http://cran.hic-tre.dundee.ac.uk/"
-       options(repos=r)
-})
-
 # Set timezone
 Sys.setenv(TZ='Europe/London')
+
 "@
+
+# Internal CRAN proxy or repository
+if ( $Env:CRAN_PROXY_SERVER ) {
+  Write-Output "Configuring CRAN proxy ${Env:CRAN_PROXY_SERVER}"
+  $RConfig += @"
+local({r <- getOption("repos")
+       r["CRAN"] <- "${Env:CRAN_PROXY_SERVER}"
+       options(repos=r)
+})
+"@
+}
+
 Set-Content "C:\Program Files\R\R-4.4.0\etc\Rprofile.site" $RConfig
 Set-Content "C:\Users\Administrator\Documents\.Renviron" "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1"
