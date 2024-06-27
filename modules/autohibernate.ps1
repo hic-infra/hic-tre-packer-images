@@ -1,7 +1,7 @@
 
 $ramGB = (Get-CimInstance Win32_PhysicalMemory).Capacity / 1024 / 1024 / 1024
 
-if ($Env:AUTOHIBERNATE_TIME -eq $null) {
+if ($null -eq $Env:AUTOHIBERNATE_TIME) {
     $Env:AUTOHIBERNATE_TIME = 120
 }
 
