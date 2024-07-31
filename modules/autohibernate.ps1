@@ -4,7 +4,7 @@ if ($null -eq $Env:AUTOHIBERNATE_TIME) {
 }
 
 
-$idleScript = "C:\workdir\idleshutdown.ps1"
+$idleScript = "C:\Tools\idleshutdown.ps1"
 New-Item $idleScript
 Set-Content $idleScript @"
 `$quser = quser | ForEach-Object -Process { `$_ -replace '\s{2,21}',',' } | ConvertFrom-Csv
