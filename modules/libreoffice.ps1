@@ -3,8 +3,8 @@ $ProgressPreference = 'SilentlyContinue' # Disable (slow) progress bar
 
 Set-Location C:\Tools
 
-$LIBRE_VERSION = "24.2.3"
-$LIBRE_HASH    = "12b988318452120d31a4c618bc6ac314ad3bf99157584d0c2bf6029801a4cf31"
+$LIBRE_VERSION = "24.2.5"
+$LIBRE_HASH    = "cad625d119db4720df5270fa2d860e0ed56d6e374b878e19a3cab4af68f1f54f"
 
 $LIBRE_URL = "https://mirrors.ukfast.co.uk/sites/documentfoundation.org/tdf/libreoffice/stable/${LIBRE_VERSION}/win/x86_64/LibreOffice_${LIBRE_VERSION}_Win_x86-64.msi"
 
