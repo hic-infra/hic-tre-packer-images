@@ -17,13 +17,17 @@ Set-Content $idleScript @"
 # i.e. "days.hours:minutes" or just "hours:minutes"
 `$idleTime = (`$session.'IDLE TIME').Replace('+', '.')
 if (`$idleTime -eq ".") { `$idleTime = 0 }
-if (`$idleTime -notmatch "\.") { `$idleTime = "0.0:`$idleTime" }
+if (`$idleTime -notmatch ":") { `$idleTime = "0:`$idleTime" }
+
+# A single number will be cast to days.
+# H:M (or HH:MM) will be cast correctly.
 `$idleTime = [TimeSpan]`$idleTime
 
 if (`$idleTime.TotalMinutes -ge $Env:AUTOHIBERNATE_TIME) {
   Stop-Computer -ComputerName localhost -Force
 }
 "@
+
 
 $action = New-ScheduledTaskAction -Execute powershell.exe `
   -Argument "-File $idleScript"
