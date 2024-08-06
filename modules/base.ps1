@@ -34,3 +34,4 @@ $WshShell = New-Object -comObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut("C:\Users\Administrator\Desktop\Remount D Drive.lnk")
 $Shortcut.TargetPath = $batchPath
 $Shortcut.Save()
+
