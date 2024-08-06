@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install HIC CA certificate
 sudo tee /usr/local/share/ca-certificates/hic-tre.crt <<EOF
 -----BEGIN CERTIFICATE-----
