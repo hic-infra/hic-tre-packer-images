@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Install HIC CA certificate
-sudo tee /usr/local/share/ca-certificates/hic-tre.crt <<EOF
+sudo mkdir -p /usr/local/share/ca-certificates/hic
+sudo chmod 755 /usr/local/share/ca-certificates/hic
+sudo tee /usr/local/share/ca-certificates/hic/hic-tre.crt <<EOF
 -----BEGIN CERTIFICATE-----
 MIIG0jCCBLqgAwIBAgIUSG5U78ew7zWqsiFJSPbTeJwhdHcwDQYJKoZIhvcNAQEF
 BQAwgZMxCzAJBgNVBAYTAkdCMT4wPAYDVQQKDDVIZWFsdGggSW5mb3JtYXRpY3Mg
@@ -42,3 +44,19 @@ zvyXRCnDutC2I48pjubDIKtp2crIOMdsmtBVCQq6gX1Sl/4z4E6BXEWkfVcSBk+O
 ws7bgq7KAqJqvvPyVIeOW0hx4AX+5Q==
 -----END CERTIFICATE-----
 EOF
+sudo chmod 644 /usr/local/share/ca-certificates/hic/hic-tre.crt
+sudo update-ca-certificates
+
+# Firefox doesn't use the system certificates by default, but a policy
+# can be used to force the installation of the certificate at the next
+# run.
+sudo mkdir /etc/firefox/policies
+sudo tee /etc/firefox/policies/policies.json <<JSON
+{
+  "policies": {
+    "Certificates": {
+      "Install": ["/usr/local/share/ca-certificates/hic/hic-tre.crt"]
+    }
+  }
+}
+JSON
