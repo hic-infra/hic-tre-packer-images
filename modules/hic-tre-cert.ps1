@@ -32,7 +32,7 @@ TaVEtXbOrFKFgzFeVOFfycfSahb85bdWy3Fpnj4UWc5rPrIM0bl2bAH6ZgtmqYaq
 3vMj23QxEFtXi10HnVuPU4fXoIdurGiktpsi+bkAvED7pm8T64Fiky8HPF5okuof
 Y0yM9+mo8F2AD8Y/LGuxWBsxTK317zfQiRLc
 -----END CERTIFICATE-----
-"@ | Out-File -FilePath C:\workdir\hic-tre.dundee.ac.uk.crt
+"@ | Out-File -FilePath C:\Tools\hic-tre.dundee.ac.uk.crt
 
-Get-Item C:\workdir\hic-tre.dundee.ac.uk.crt | `
+Get-Item C:\Tools\hic-tre.dundee.ac.uk.crt | `
   Import-Certificate -CertStoreLocation Cert:\LocalMachine\Root
