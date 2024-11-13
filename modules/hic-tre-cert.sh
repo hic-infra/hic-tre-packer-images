@@ -60,3 +60,15 @@ sudo tee /etc/firefox/policies/policies.json <<JSON
   }
 }
 JSON
+
+# /etc/profile.d/*.sh not called due to how we start VNC
+if ! grep -Fxq "# HIC TRE CA CERT" /etc/bash.bashrc ; then
+    sudo tee -a /etc/bash.bashrc <<EOF
+
+# HIC TRE CA CERT
+export SSL_CERT_FILE=/usr/local/share/ca-certificates/hic/hic-tre.crt
+export REQUESTS_CA_BUNDLE=\$SSL_CERT_FILE
+export CURL_CA_BUNDLE=\$SSL_CERT_FILE
+EOF
+fi
+
