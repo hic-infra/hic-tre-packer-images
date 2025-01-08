@@ -2,8 +2,8 @@
 Set-Location C:\Tools
 $ProgressPreference = "SilentlyContinue" # PS progress bar is slow
 
-$VSCODE_SHA256 = "f4cd3b2d845bd2a61152707c2b8626c10e8e9bcd1a8163944c34635172f6cdd9"
-$VSCODE_URL = "https://az764295.vo.msecnd.net/stable/74b1f979648cc44d385a2286793c226e611f59e7/VSCodeUserSetup-x64-1.71.2.exe"
+$VSCODE_SHA256 = "7ce997d7a80ff838c2b7312be6e26917a8b66a67c633ee0b3317b1ae70010077"
+$VSCODE_URL = "https://vscode.download.prss.microsoft.com/dbazure/download/stable/f1a4fb101478ce6ec82fe9627c43efbf9e98c813/VSCodeUserSetup-x64-1.95.3.exe"
 
 Invoke-WebRequest -Uri ${VSCODE_URL} -OutFile C:\Tools\vscode.exe
 
