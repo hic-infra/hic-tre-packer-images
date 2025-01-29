@@ -2,11 +2,11 @@
 
 set -eu
 
-SLICER_FILENAME=Slicer-4.11.20210226-linux-amd64
-SLICER_SHA256=12b68e3717f1d0800a52578b686d3abc6b2159855fcbe8f3a2055ca050ddb09a
+SLICER_FILENAME=Slicer-5.8.0-linux-amd64
+SLICER_SHA256=1d0784b9f7849e6cc509569d66b8d8ba690e08c970e58c19c7425b11a3f8e94c
 
 # useful url
-curl -sfL https://download.slicer.org/bitstream/60add706ae4540bf6a89bf98 \
+curl -sfL https://slicer-packages.kitware.com/api/v1/item/679325961357655fd585ffb5/download \
     -o $SLICER_FILENAME.tar.gz
 
 echo "${SLICER_SHA256} ${SLICER_FILENAME}.tar.gz" |sha256sum -c -
@@ -15,7 +15,7 @@ sudo tar zxvf ${SLICER_FILENAME}.tar.gz -C /usr/local/
 
 cat <<EOF > ~/Desktop/Slicer.desktop
 [Desktop Entry]
-Name=Slicer 4.11
+Name=Slicer 5.8
 GenericName=Slicer
 Terminal=false
 Exec=/usr/local/${SLICER_FILENAME}/Slicer
