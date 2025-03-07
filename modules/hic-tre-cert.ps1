@@ -62,15 +62,15 @@ New-Item -Path "C:\Program Files\Mozilla Firefox\" -Name distribution -ItemType 
 # This covers both conda and CRAN, but it also overrides their own
 # provided CA chain files. That's probably ok given we don't allow
 # access to the internet.
-[Environment]::SetEnvironmentVariable(
-    "SSL_CERT_FILE",
-    "C:\Tools\hic-tre.dundee.ac.uk.crt",
-    [System.EnvironmentVariableTarget]::User)
-[Environment]::SetEnvironmentVariable(
-    "REQUESTS_CA_BUNDLE",
-    "C:\Tools\hic-tre.dundee.ac.uk.crt",
-    [System.EnvironmentVariableTarget]::User)
-[Environment]::SetEnvironmentVariable(
-    "CURL_CA_BUNDLE",
-    "C:\Tools\hic-tre.dundee.ac.uk.crt",
-    [System.EnvironmentVariableTarget]::User)
+# [Environment]::SetEnvironmentVariable(
+#     "SSL_CERT_FILE",
+#     "C:\Tools\hic-tre.dundee.ac.uk.crt",
+#     [System.EnvironmentVariableTarget]::User)
+# [Environment]::SetEnvironmentVariable(
+#     "REQUESTS_CA_BUNDLE",
+#     "C:\Tools\hic-tre.dundee.ac.uk.crt",
+#     [System.EnvironmentVariableTarget]::User)
+# [Environment]::SetEnvironmentVariable(
+#     "CURL_CA_BUNDLE",
+#     "C:\Tools\hic-tre.dundee.ac.uk.crt",
+#     [System.EnvironmentVariableTarget]::User)
