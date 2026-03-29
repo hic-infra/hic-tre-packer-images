@@ -22,6 +22,7 @@ modules:
   - ssms
   - utils
   - vscode
+  - shared-services-config
 
 files:
   - src: conda-envs/example.yml
