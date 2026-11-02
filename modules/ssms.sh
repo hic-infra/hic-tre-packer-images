@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl -sfLO https://sqlopsbuilds.azureedge.net/stable/fab63efd307e54c063c8af03474bbb5d77f5fd11/azuredatastudio-linux-1.35.1.deb
-sudo dpkg -i azuredatastudio-linux-1.35.1.deb
+curl -sfLO https://download.microsoft.com/download/6b2bfeac-9c1b-4182-9a2f-ce86ff8cc371/azuredatastudio-linux-1.52.0.deb
+sudo dpkg -i azuredatastudio-linux-1.52.0.deb
 
 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
