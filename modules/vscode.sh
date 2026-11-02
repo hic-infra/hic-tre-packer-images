@@ -10,3 +10,7 @@ rm -f packages.microsoft.gpg
 sudo apt-get update -y -q
 sudo apt-get install -y -q \
   code
+
+code --install-extension ms-python.python
+code --install-extension REditorSupport.r
+code --install-extension ms-mssql.mssql

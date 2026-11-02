@@ -65,11 +65,12 @@ sudo apt install -y r-cran-dbi r-cran-qqman r-cran-metafor \
      r-cran-tidyverse
 
 # RSharp
-sudo apt-get install -y dotnet-runtime-8.0 libcurl4-openssl-dev libssl-dev libxml2-dev \
-     libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
-     libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+if [ "$DISTRIB_RELEASE" == "22.04" ] ; then
+    sudo apt-get install -y dotnet-runtime-8.0 libcurl4-openssl-dev libssl-dev libxml2-dev \
+	 libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
+	 libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 
-sudo R --no-save <<EOF
+    sudo R --no-save <<EOF
 install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))
 pak::pak("Open-Systems-Pharmacology/rSharp")
 pak::pak("Open-Systems-Pharmacology/OSPSuite.RUtils")
@@ -77,10 +78,11 @@ pak::pak("Open-Systems-Pharmacology/OSPSuite.Plots")
 pak::pak("Open-Systems-Pharmacology/OSPSuite-R")
 EOF
 
-sudo apt install -y software-properties-common
-sudo add-apt-repository ppa:dotnet/backports
-sudo apt update
-sudo apt install -y dotnet-runtime-10.0
+    sudo apt install -y software-properties-common
+    sudo add-apt-repository ppa:dotnet/backports
+    sudo apt update
+    sudo apt install -y dotnet-runtime-10.0
+fi
 
 # Configure R CRAN access for inside the TRE.
 echo "RSTUDIO_DISABLE_SECURE_DOWNLOAD_WARNING=1" >> "$HOME/.Renviron"
