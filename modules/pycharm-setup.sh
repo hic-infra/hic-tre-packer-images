@@ -5,17 +5,17 @@ set -eu
 SETUPDIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 cd "$SETUPDIR"
 
-PYCHARM_VERSION=2023.2.1
-PYCHARM_SHA256=5956c6cb5a5bad1d9749e487b3bb69fcbf0170f52324e4ff009283b723838778
+PYCHARM_VERSION=2026.2.4
+PYCHARM_SHA256=87d39ae1125f7298e8f8c4b96aac836043eb15053f8dc5d7c52356eaab5762a8
 
 echo "Installing PyCharm"
-curl -sfLO https://download-cdn.jetbrains.com/python/pycharm-community-${PYCHARM_VERSION}.tar.gz
-echo "$PYCHARM_SHA256 pycharm-community-${PYCHARM_VERSION}.tar.gz" | sha256sum -c -
+curl -sfLO https://download.jetbrains.com/python/pycharm-${PYCHARM_VERSION}.tar.gz
+echo "$PYCHARM_SHA256 pycharm-${PYCHARM_VERSION}.tar.gz" | sha256sum -c -
 
-sudo tar -zxf pycharm-community-${PYCHARM_VERSION}.tar.gz -C /opt
-rm pycharm-community-${PYCHARM_VERSION}.tar.gz
+sudo tar -zxf pycharm-${PYCHARM_VERSION}.tar.gz -C /opt
+rm pycharm-${PYCHARM_VERSION}.tar.gz
 
-sudo ln -s /opt/pycharm-community-${PYCHARM_VERSION} /opt/pycharm
+sudo ln -s /opt/pycharm-${PYCHARM_VERSION} /opt/pycharm
 
 cat <<EOF | sudo tee /opt/pycharm/PyCharm.desktop
 [Desktop Entry]
@@ -23,8 +23,8 @@ Name=PyCharm
 GenericName=Python IDE
 Comment=Launch JetBrains PyCharm Development Environment
 Terminal=true
-Exec=/opt/pycharm-community-${PYCHARM_VERSION}/bin/pycharm.sh
-Icon=/opt/pycharm-community-${PYCHARM_VERSION}/bin/pycharm.svg
+Exec=/opt/pycharm-${PYCHARM_VERSION}/bin/pycharm.sh
+Icon=/opt/pycharm-${PYCHARM_VERSION}/bin/pycharm.svg
 Type=Application
 EOF
 sudo chmod +x /opt/pycharm/PyCharm.desktop
