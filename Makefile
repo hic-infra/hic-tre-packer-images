@@ -26,7 +26,7 @@ $(BUILDDIR)/%-manifest.json: $(BUILDDIR)/%.pkr.hcl
 
 $(BUILDDIR)/%.pkr.hcl: $(SOURCEDIR)/%.yml
 	@mkdir -p $(BUILDDIR) $(TEMPDIR)/$(BUILDDIR)
-	python $(REPO_DIR)/j2-templater.py $(TEMPLATE) $< $(TEMPDIR)/$@
+	python3 $(REPO_DIR)/j2-templater.py $(TEMPLATE) $< $(TEMPDIR)/$@
 	packer validate $(TEMPDIR)/$@
 	mv $(TEMPDIR)/$@ $@
 
