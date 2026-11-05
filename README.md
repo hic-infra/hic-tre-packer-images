@@ -42,7 +42,7 @@ If successful this will output a `<CONFIG>-manifest.json` file under `./builds/`
 
 To build a single AMI, e.g. for [`./configs/hic-windows-2019-example.yml`](./configs/hic-windows-2019-example.yml), run
 ```
-make builds/hic-windows-2019-example-manifest.json
+make images builds/hic-windows-2019-example-manifest.json
 ```
 
 ## Modules
