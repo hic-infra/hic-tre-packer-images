@@ -1,3 +1,7 @@
+# virtual env
+/env
+
+# built files
 *-manifest.json
 builds
 build-tmp
