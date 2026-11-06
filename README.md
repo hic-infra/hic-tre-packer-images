@@ -11,6 +11,14 @@ These AMIs are all very similar so we've written some tools to make it easier to
 You must install Packer and Python 3.
 You will also need access to an AWS account.
 
+Install Python dependencies:
+
+```bash
+python3 -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
 If you are using a recent version of Packer you may also need to install the Amazon plugin:
 ```
 packer plugins install github.com/hashicorp/amazon
@@ -32,7 +40,8 @@ make images
 ```
 If successful this will output a `<CONFIG>-manifest.json` file under `./builds/` for each input configuration.
 
-To build a single AMI, e.g. for [`./configs/hic-windows-2019-example.yml`](./configs/hic-windows-2019-example.yml), run
+To build a single AMI, e.g. for [`./configs/hic-windows-2019-example.yml`](./configs/hic-windows-2019-example.yml), run (switching out `.pkr.hcl` for `-manifest.json`)
+
 ```
 make builds/hic-windows-2019-example-manifest.json
 ```
