@@ -40,9 +40,10 @@ make images
 ```
 If successful this will output a `<CONFIG>-manifest.json` file under `./builds/` for each input configuration.
 
-To build a single AMI, e.g. for [`./configs/hic-windows-2019-example.yml`](./configs/hic-windows-2019-example.yml), run
+To build a single AMI, e.g. for [`./configs/hic-windows-2019-example.yml`](./configs/hic-windows-2019-example.yml), run (switching out `.pkr.hcl` for `-manifest.json`)
+
 ```
-make images builds/hic-windows-2019-example-manifest.json
+make builds/hic-windows-2019-example-manifest.json
 ```
 
 ## Modules
